@@ -1,0 +1,15 @@
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.exe
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.deps.json
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.runtimeconfig.json
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.runtimeconfig.dev.json
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.dll
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\bin\Debug\netcoreapp3.1\MarkitWSO.pdb
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.csprojAssemblyReference.cache
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.csproj.GenerateResource.cache
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.AssemblyInfoInputs.cache
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.AssemblyInfo.cs
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.csproj.CoreCompileInputs.cache
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.dll
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.pdb
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.genruntimeconfig.cache
+C:\Users\czeisel\source\repos\CostPriceCalculationFIFO\MarkitWSO\obj\Debug\netcoreapp3.1\MarkitWSO.frmMarkitWSO.resources
