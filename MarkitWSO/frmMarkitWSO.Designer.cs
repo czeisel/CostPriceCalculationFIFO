@@ -45,7 +45,6 @@
             this.lblRemainingSharesCost = new System.Windows.Forms.Label();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnTest = new System.Windows.Forms.Button();
-            this.tbLog = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -99,6 +98,7 @@
             // 
             // dtpSellDate
             // 
+            this.dtpSellDate.Enabled = false;
             this.dtpSellDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.dtpSellDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSellDate.Location = new System.Drawing.Point(204, 85);
@@ -198,26 +198,17 @@
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(204, 297);
+            this.btnTest.Location = new System.Drawing.Point(301, 309);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(140, 21);
+            this.btnTest.Size = new System.Drawing.Size(140, 24);
             this.btnTest.TabIndex = 10;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
-            // tbLog
-            // 
-            this.tbLog.Location = new System.Drawing.Point(7, 339);
-            this.tbLog.Multiline = true;
-            this.tbLog.Name = "tbLog";
-            this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbLog.Size = new System.Drawing.Size(434, 211);
-            this.tbLog.TabIndex = 11;
-            // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(204, 270);
+            this.btnReset.Location = new System.Drawing.Point(301, 282);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(140, 21);
             this.btnReset.TabIndex = 12;
@@ -229,9 +220,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 562);
+            this.ClientSize = new System.Drawing.Size(442, 341);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.tbLog);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnCalculate);
             this.Controls.Add(this.lblRemainingSharesCost);
@@ -249,6 +239,7 @@
             this.Controls.Add(this.tbSharesSold);
             this.Controls.Add(this.lblSharesSold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmMarkitWSO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Markit WSO - Cost Price Calculator";
@@ -276,7 +267,6 @@
         private System.Windows.Forms.Label lblRemainingSharesCost;
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.Button btnTest;
-        private System.Windows.Forms.TextBox tbLog;
         private System.Windows.Forms.Button btnReset;
     }
 }
