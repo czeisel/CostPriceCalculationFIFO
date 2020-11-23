@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MarkitWSO.Trading;
+using MarkitWSO.Metrics;
 
 namespace MarkitWSO
 {
     public partial class frmMarkitWSO : Form
     {
-        List<Share> SharesList;
-        Queue<Share> qShares;
+        //Queue<Share> _QueuedShares = new Queue<Share>();//could use for FIFO 
+        readonly TradeCalculator _Calculator = new TradeCalculator();
+        List<Share> _SharesList;
         Share _share1 = new Share();
         Share _share2 = new Share();
         Share _share3 = new Share();
@@ -27,25 +29,21 @@ namespace MarkitWSO
             _share1.ShareCount = 100;
             _share1.SharePrice = 10.00;
 
-            qShares = new Queue<Share>();
-            SharesList = new List<Share>();
+            _SharesList = new List<Share>();
 
-            qShares.Enqueue(_share1);
-            SharesList.Add(_share1);
+            _SharesList.Add(_share1);
 
             _share2.PurchaseDate = Convert.ToDateTime("2/2/2005");
             _share2.ShareCount = 40;
             _share2.SharePrice = 12.00;
 
-            qShares.Enqueue(_share2);
-            SharesList.Add(_share2);
+            _SharesList.Add(_share2);
 
             _share3.PurchaseDate = Convert.ToDateTime("03/03/2005");
             _share3.ShareCount = 50;
             _share3.SharePrice = 11.00;
 
-            qShares.Enqueue(_share3);
-            SharesList.Add(_share3);
+            _SharesList.Add(_share3);
         }
 
         public frmMarkitWSO()
@@ -53,13 +51,15 @@ namespace MarkitWSO
             InitializeComponent();
         }
 
-        private void btnCalculate_Click(object sender, EventArgs e)
+        private void processList()
         {
             try
             {
-                int totalShareCount = qShares.Sum(x => x.ShareCount);
+                //get input
+                int totalShareCount = _SharesList.Sum(x => x.ShareCount);
                 int soldShareCount = Convert.ToInt32(tbSharesSold.Text);
 
+                //process list
                 if (soldShareCount <= totalShareCount)
                 {
                     double soldShareCost = 0;
@@ -68,17 +68,19 @@ namespace MarkitWSO
                     int sharesSold = Convert.ToInt32(tbSharesSold.Text);
                     int remainingShares = 0;
 
-                    foreach (Share share in qShares)
+                    foreach (Share share in _SharesList)
                     {
                         if (sharesSold > 0)
                         {
                             if (sharesSold >= share.ShareCount)
                             {
-                                soldShareCost += share.ShareCount * share.SharePrice;
+                                //metrics calculator.Cost implemented.
+                                soldShareCost += _Calculator.Cost(share.ShareCount, share.SharePrice);
                             }
                             else if (sharesSold < share.ShareCount)
                             {
                                 soldShareCost += sharesSold * share.SharePrice;
+
                                 remainingShareCost = (share.ShareCount - sharesSold) * share.SharePrice;
                             }
                         }
@@ -95,17 +97,77 @@ namespace MarkitWSO
                     lblSoldSharesCostResult.Text = (soldShareCost / Convert.ToInt32(tbSharesSold.Text)).ToString();
                     lblSaleGainLossResults.Text = (Convert.ToDouble(tbSharesSold.Text) * Convert.ToDouble(tbPricePerShare.Text) - soldShareCost).ToString();
                     lblRemainingSharesCostResults.Text = (remainingShareCost / remainingShares).ToString();
-                    tbLog.Text += (remainingShareCost / remainingShares).ToString();
                 }
                 else
                 {
                     throw new Exception("Requested shares sold exceeds current shares available");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            #region Original Code
+            //try
+            //{
+            //    //get input
+            //    int totalShareCount = _SharesList.Sum(x => x.ShareCount);
+            //    int soldShareCount = Convert.ToInt32(tbSharesSold.Text);
+
+            //    //process list
+            //    if (soldShareCount <= totalShareCount)
+            //    {
+            //        double soldShareCost = 0;
+            //        double remainingShareCost = 0;
+
+            //        int sharesSold = Convert.ToInt32(tbSharesSold.Text);
+            //        int remainingShares = 0;
+
+            //        foreach (Share share in _SharesList)
+            //        {
+            //            if (sharesSold > 0)
+            //            {
+            //                if (sharesSold >= share.ShareCount)
+            //                {
+            //                    //metrics calculator.Cost implemented.
+            //                    soldShareCost += _Calculator.Cost(share.ShareCount, share.SharePrice);
+            //                }
+            //                else if (sharesSold < share.ShareCount)
+            //                {
+            //                    soldShareCost += sharesSold * share.SharePrice;
+
+            //                    remainingShareCost = (share.ShareCount - sharesSold) * share.SharePrice;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                remainingShareCost += share.ShareCount * share.SharePrice;
+            //            }
+            //            sharesSold -= share.ShareCount;
+            //        }
+
+            //        remainingShares = sharesSold * -1;
+
+            //        lblRemainingSharesResult.Text = remainingShares.ToString();
+            //        lblSoldSharesCostResult.Text = (soldShareCost / Convert.ToInt32(tbSharesSold.Text)).ToString();
+            //        lblSaleGainLossResults.Text = (Convert.ToDouble(tbSharesSold.Text) * Convert.ToDouble(tbPricePerShare.Text) - soldShareCost).ToString();
+            //        lblRemainingSharesCostResults.Text = (remainingShareCost / remainingShares).ToString();
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Requested shares sold exceeds current shares available");
+            //    }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            #endregion
+            processList();
         }
 
         private void btnTest_Click(object sender, EventArgs e)
@@ -148,45 +210,48 @@ namespace MarkitWSO
             //lblRemainingSharesCostResults.Text = (remainingShareCost / remainingshares).ToString();
             //tbLog.Text += (remainingShareCost / remainingshares).ToString();
             #endregion
+            CalculateCost cc = new CalculateCost();
 
-            int totalShareCount = qShares.Sum(x => x.ShareCount);
-            int soldShareCount = Convert.ToInt32(tbSharesSold.Text);
+            int totalShareCount = _SharesList.Sum(x => x.ShareCount);//Total number of shares
+            int soldShareCount = Convert.ToInt32(tbSharesSold.Text);//Shares Sold
 
             if (soldShareCount <= totalShareCount)
             {
-                double soldShareCost = 0;
-                double remainingShareCost = 0;
+                double soldShareCost = 0;//cost per share
+                double remainingShareCost = 0;//Remaining Share Count
 
-                int sharesSold = Convert.ToInt32(tbSharesSold.Text);
+                int sharesSold = Convert.ToInt32(tbSharesSold.Text);//how much the user is selling
                 int remainingShares = 0;
 
-                foreach (Share share in SharesList)
+                foreach (Share share in _SharesList)
                 {
                     if (sharesSold > 0)
                     {
                         if (sharesSold >= share.ShareCount)
                         {
-                            soldShareCost += share.ShareCount * share.SharePrice;
+                            soldShareCost += cc.Cost(share.ShareCount, share.SharePrice);
                         }
                         else if (sharesSold < share.ShareCount)
                         {
-                            soldShareCost += sharesSold * share.SharePrice;
-                            remainingShareCost = (share.ShareCount - sharesSold) * share.SharePrice;
+                            soldShareCost += _Calculator.Cost(sharesSold, share.SharePrice);
+                            remainingShareCost = _Calculator.Cost((share.ShareCount - sharesSold), share.SharePrice);
                         }
                     }
                     else
                     {
-                        remainingShareCost += share.ShareCount * share.SharePrice;
+                        remainingShareCost += cc.Cost(share.ShareCount, share.SharePrice);
                     }
                     sharesSold -= share.ShareCount;
                 }
 
-                remainingShares = sharesSold * -1;
+                remainingShares = Math.Abs(sharesSold);//Absolute value for amount to work with 
 
-                lblRemainingSharesResult.Text = remainingShares.ToString();
-                lblSoldSharesCostResult.Text = (soldShareCost / Convert.ToInt32(tbSharesSold.Text)).ToString();
-                lblSaleGainLossResults.Text = (Convert.ToDouble(tbSharesSold.Text) * Convert.ToDouble(tbPricePerShare.Text) - soldShareCost).ToString();
-                lblRemainingSharesCostResults.Text = (remainingShareCost / remainingShares).ToString();
+                //display
+                lblRemainingSharesResult.Text = remainingShares.ToString();//amount left
+                lblSoldSharesCostResult.Text = (soldShareCost / Convert.ToInt32(tbSharesSold.Text)).ToString();//Cost for Sold Shares
+                CalculatePnL cpnl = new CalculatePnL();
+                lblSaleGainLossResults.Text = (cpnl.PnL(Convert.ToInt32(tbSharesSold.Text), Convert.ToDouble(tbPricePerShare.Text), soldShareCost)).ToString();
+                lblRemainingSharesCostResults.Text = (remainingShareCost / remainingShares).ToString();//Cost Remaining Shares
             }
         }
 
