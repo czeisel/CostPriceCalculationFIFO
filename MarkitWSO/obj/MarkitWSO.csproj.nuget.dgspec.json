@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\czeisel\\source\\repos\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj": {}
+    "C:\\Users\\czeisel\\Documents\\GitHub\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\czeisel\\source\\repos\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj": {
+    "C:\\Users\\czeisel\\Documents\\GitHub\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\czeisel\\source\\repos\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj",
+        "projectUniqueName": "C:\\Users\\czeisel\\Documents\\GitHub\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj",
         "projectName": "MarkitWSO",
-        "projectPath": "C:\\Users\\czeisel\\source\\repos\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj",
+        "projectPath": "C:\\Users\\czeisel\\Documents\\GitHub\\CostPriceCalculationFIFO\\MarkitWSO\\MarkitWSO.csproj",
         "packagesPath": "C:\\Users\\czeisel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\czeisel\\source\\repos\\CostPriceCalculationFIFO\\MarkitWSO\\obj\\",
+        "outputPath": "C:\\Users\\czeisel\\Documents\\GitHub\\CostPriceCalculationFIFO\\MarkitWSO\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
           "C:\\Users\\czeisel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
